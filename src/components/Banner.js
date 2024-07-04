@@ -4,7 +4,7 @@ import Footer from './Footer';
 const Banner = () => (
     <div>
         <div className="min-h-screen text-white flex flex-col justify-end">
-            <div className="lg:flex ml-8 mb-8">
+            <div className="lg:flex ml-8 mb-28">
                 <div>
                     <h1 className="lg:ml-14 lg:mb-4 lg:text-5xl text-2xl ">TEMPORADA 2024</h1>
                 </div>

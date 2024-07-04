@@ -1,61 +1,61 @@
-// src/components/Navbar.js
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Segmentos = [
     {
         name: "DAMA",
         content: [
-            { name: "Vestidos", url: "/sales?category=DAMA_Vestidos" },
-            { name: "Camisas", url: "/sales?category=DAMA_Camisas" },
-            { name: "Ceremonia", url: "/sales?category=DAMA_Ceremonia" },
-            { name: "Gran Gala", url: "/sales?category=DAMA_GranGala" },
+            { name: "Vestidos", url: "/sales?category=Vestidos Dama" },
+            { name: "Camisas", url: "/sales?category=Camisas Dama" },
+            { name: "Ceremonia", url: "/sales?category=Ceremonia Dama" },
+            { name: "Gran Gala", url: "/sales?category=GranGala Dama" },
         ]
     },
     {
         name: "CABALLEROS",
         content: [
-            { name: "Camisas", url: "/sales?category=CABALLEROS_Camisas" },
-            { name: "Polos y Playeras", url: "/sales?category=CABALLEROS_PolosPlayeras" },
-            { name: "Chamarras", url: "/sales?category=CABALLEROS_Chamarras" },
-            { name: "Ropa Interior", url: "/sales?category=CABALLEROS_RopaInterior" },
-            { name: "Trajes", url: "/sales?category=CABALLEROS_Trajes" },
-            { name: "Ceremonias", url: "/sales?category=CABALLEROS_Ceremonias" },
-            { name: "Pantalones", url: "/sales?category=CABALLEROS_Pantalones" },
-            { name: "Shorts", url: "/sales?category=CABALLEROS_Shorts" },
-            { name: "Looks Completos", url: "/sales?category=CABALLEROS_LooksCompletos" },
-            { name: "Blazer", url: "/sales?category=CABALLEROS_Blazer" },
+            { name: "Camisas", url: "/sales?category=Camisas Caballeros" },
+            { name: "Polos y Playeras", url: "/sales?category=PolosPlayeras Caballeros" },
+            { name: "Chamarras", url: "/sales?category=Chamarras Caballeros" },
+            { name: "Ropa Interior", url: "/sales?category=RopaInterior Caballeros" },
+            { name: "Trajes", url: "/sales?category=Trajes Caballeros" },
+            { name: "Ceremonias", url: "/sales?category=Ceremonias Caballeros" },
+            { name: "Pantalones", url: "/sales?category=Pantalones Caballeros" },
+            { name: "Shorts", url: "/sales?category=Shorts Caballeros" },
+            { name: "Looks Completos", url: "/sales?category=Looks Completos Caballeros" },
+            { name: "Blazer", url: "/sales?category=Blazer Caballeros" },
         ]
     },
     {
         name: "UNISEX",
         content: [
-            { name: "Camisas", url: "/sales?category=UNISEX_Camisas" },
-            { name: "Chamarras", url: "/sales?category=UNISEX_Chamarras" },
+            { name: "Camisas", url: "/sales?category=Camisas UNISEX" },
+            { name: "Chamarras", url: "/sales?category=Chamarras UNISEX" },
         ]
     },
     {
         name: "HOGAR Y ESTILO DE VIDA",
         content: [
-            { name: "Accesorios", url: "/sales?category=HOGAR_Accesorios" },
-            { name: "Snacks", url: "/sales?category=HOGAR_Snacks" },
-            { name: "Bebidas", url: "/sales?category=HOGAR_Bebidas" },
-            { name: "Ropa de Cama", url: "/sales?category=HOGAR_RopaCama" },
+            { name: "Accesorios", url: "/sales?category=Accesorios" },
+            { name: "Snacks", url: "/sales?category=Snacks" },
+            { name: "Bebidas", url: "/sales?category=Bebidas" },
+            { name: "Ropa de Cama", url: "/sales?category=Ropa de Cama" },
         ]
     },
     {
         name: "BOOKS",
         content: [
-            { name: "COLECCIÓN 2023", url: "/sales?category=BOOKS_Coleccion2023" },
-            { name: "COLECCIÓN 2022", url: "/sales?category=BOOKS_Coleccion2022" },
-            { name: "COLECCIÓN 2021", url: "/sales?category=BOOKS_Coleccion2021" },
-            { name: "COLECCIÓN 2020", url: "/sales?category=BOOKS_Coleccion2020" },
+            { name: "COLECCIÓN 2023", url: "/sales?category=Coleccion 2023" },
+            { name: "COLECCIÓN 2022", url: "/sales?category=Coleccion 2022" },
+            { name: "COLECCIÓN 2021", url: "/sales?category=Coleccion 2021" },
+            { name: "COLECCIÓN 2020", url: "/sales?category=Coleccion 2020" },
         ]
     },
     {
         name: "UNIFORMES EMPRESARIALES",
         content: [
-            { name: "Camisas", url: "/sales?category=UNIFORMES_Camisas" },
+            { name: "Camisas", url: "/sales?category=UNIFORMES Camisas" },
         ]
     },
 ];
@@ -65,6 +65,7 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [expandedSegment, setExpandedSegment] = useState(null);
     const router = useRouter();
+    const { isAuthenticated } = useAuth();
 
     const handleMouseEnter = (name) => {
         setActiveSegment(name);
@@ -88,11 +89,19 @@ const Navbar = () => {
         router.push('/cart');
     };
 
+    const goToProfileOrLogin = () => {
+        if (isAuthenticated) {
+            router.push('/profile');
+        } else {
+            router.push('/login');
+        }
+    };
+
     return (
         <nav className="block p-4 z-20 bg-black bg-gradient-to-t from-transparent to-black bg-opacity-0 hover:bg-opacity-100 duration-500 text-white fixed w-full">
             <div className="flex justify-between items-center px-8 pb-2">
                 <div className="text-white md:block hidden">
-                    <a className="text-xs mr-3 flex items-center duration-500 hover:text-orange-400 hover:border-orange-400 border-b-2 hover:pb-1 border-transparent" href="#">
+                    <a className="text-xs mr-3 flex items-center duration-500 hover:text-orange-400 hover:border-orange-400 border-b-2 hover:pb-1 border-transparent" href="/antonio-figueroa" target="_blank">
                         Antonio Figueroa
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-up-right" width="20" height="20" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -134,12 +143,12 @@ const Navbar = () => {
                     </a>
                     <a onClick={goCart}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-shopping-bag hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24h24z" fill="none" />
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
                             <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
                         </svg>
                     </a>
-                    <a href="#">
+                    <a onClick={goToProfileOrLogin}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user-circle hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -179,7 +188,7 @@ const Navbar = () => {
                             <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
                         </svg>
                     </a>
-                    <a href="#">
+                    <a onClick={goToProfileOrLogin}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user-circle hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -206,6 +215,16 @@ const Navbar = () => {
                             )}
                         </li>
                     ))}
+                    <div className="text-white text-center pt-4">
+                        <a className="text-xs flex items-center justify-center duration-500 hover:text-orange-400 hover:border-orange-400 border-b-2 hover:pb-1 border-transparent" href="/antonio-figueroa" target="_blank">
+                            Antonio Figueroa
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-up-right ml-1" width="20" height="20" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M17 7l-10 10" />
+                                <path d="M8 7l9 0l0 9" />
+                            </svg>
+                        </a>
+                    </div>
                 </ul>
             </div>
         </nav>
@@ -213,3 +232,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -47,7 +47,7 @@ const ProductDetails = () => {
                                     <img
                                         src={image}
                                         alt={`Product Image ${index + 1}`}
-                                        className="object-fill w-screen h-auto rounded-lg overflow-hidden"
+                                        className="object-fill w-screen h-a rounded-lg overflow-hidden"
                                         style={{ aspectRatio: '2/3' }}
                                     />
                                 </div>

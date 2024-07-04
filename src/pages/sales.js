@@ -1,10 +1,19 @@
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import products from '../data/products';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const SalesPage = () => {
     const router = useRouter();
+    const { query } = router;
+    const [category, setCategory] = useState('');
+
+    useEffect(() => {
+        if (query.category) {
+            setCategory(query.category);
+        }
+    }, [query]);
 
     const viewProductDetails = (id) => {
         router.push(`/product/${id}`);
@@ -14,7 +23,7 @@ const SalesPage = () => {
         <div className='w-full bg-zinc-200'>
             <Navbar />
             <div className="container mx-auto px-4 md:px-6 pt-28 lg:pt-48 pb-12">
-                <h1 className="text-2xl font-bold mb-6">Men's Shirts</h1>
+                <h1 className="text-2xl font-bold mb-6">{category}</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     {products.map(product => (
                         <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
