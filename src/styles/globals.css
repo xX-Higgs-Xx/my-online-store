@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.border-animation::before{
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: .3rem;
+  border-bottom: 2px solid white;
+  transition: width 0.5s ease;
+  box-sizing: border-box;
+}
+
+.border-animation:hover::before,
+.border-animation:hover::after {
+  width: 100%;
+  left: 0;
+}
+
