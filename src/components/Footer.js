@@ -1,4 +1,4 @@
-const ProductSection = () => (
+const Footer = () => (
   <footer className={'footer block w-full'}>
     <div className="bg-zinc-800 text-white py-4 text-center">
       <div className="mx-auto px-4 md:w-1/5">
@@ -45,4 +45,4 @@ const ProductSection = () => (
   </footer>
 );
 
-export default ProductSection;
+export default Footer;

@@ -1,3 +1,4 @@
+// src/components/Navbar.js
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -5,56 +6,56 @@ const Segmentos = [
     {
         name: "DAMA",
         content: [
-            { name: "Vestidos", url: "/sales" },
-            { name: "Caminas", url: "/sales" },
-            { name: "Ceremonia", url: "/sales" },
-            { name: "Gran Gala", url: "/sales" },
+            { name: "Vestidos", url: "/sales?category=DAMA_Vestidos" },
+            { name: "Camisas", url: "/sales?category=DAMA_Camisas" },
+            { name: "Ceremonia", url: "/sales?category=DAMA_Ceremonia" },
+            { name: "Gran Gala", url: "/sales?category=DAMA_GranGala" },
         ]
     },
     {
         name: "CABALLEROS",
         content: [
-            { name: "Camisas", url: "/sales" },
-            { name: "Polos y Playeras", url: "/sales" },
-            { name: "Chamarras", url: "/sales" },
-            { name: "Ropa Interior", url: "/sales" },
-            { name: "Trajes", url: "/sales" },
-            { name: "Ceremonias", url: "/sales" },
-            { name: "Pantalones", url: "/sales" },
-            { name: "Shorts", url: "/sales" },
-            { name: "Looks Completos", url: "/sales" },
-            { name: "Blazer", url: "/sales" },
+            { name: "Camisas", url: "/sales?category=CABALLEROS_Camisas" },
+            { name: "Polos y Playeras", url: "/sales?category=CABALLEROS_PolosPlayeras" },
+            { name: "Chamarras", url: "/sales?category=CABALLEROS_Chamarras" },
+            { name: "Ropa Interior", url: "/sales?category=CABALLEROS_RopaInterior" },
+            { name: "Trajes", url: "/sales?category=CABALLEROS_Trajes" },
+            { name: "Ceremonias", url: "/sales?category=CABALLEROS_Ceremonias" },
+            { name: "Pantalones", url: "/sales?category=CABALLEROS_Pantalones" },
+            { name: "Shorts", url: "/sales?category=CABALLEROS_Shorts" },
+            { name: "Looks Completos", url: "/sales?category=CABALLEROS_LooksCompletos" },
+            { name: "Blazer", url: "/sales?category=CABALLEROS_Blazer" },
         ]
     },
     {
         name: "UNISEX",
         content: [
-            { name: "Camisas", url: "/sales" },
-            { name: "Chamarras", url: "/sales" },
+            { name: "Camisas", url: "/sales?category=UNISEX_Camisas" },
+            { name: "Chamarras", url: "/sales?category=UNISEX_Chamarras" },
         ]
     },
     {
         name: "HOGAR Y ESTILO DE VIDA",
         content: [
-            { name: "Accesorios", url: "/sales" },
-            { name: "Snacks", url: "/sales" },
-            { name: "Bebidas", url: "/sales" },
-            { name: "Ropa de Cama", url: "/sales" },
+            { name: "Accesorios", url: "/sales?category=HOGAR_Accesorios" },
+            { name: "Snacks", url: "/sales?category=HOGAR_Snacks" },
+            { name: "Bebidas", url: "/sales?category=HOGAR_Bebidas" },
+            { name: "Ropa de Cama", url: "/sales?category=HOGAR_RopaCama" },
         ]
     },
     {
         name: "BOOKS",
         content: [
-            { name: "COLECCIÓN 2023", url: "/sales" },
-            { name: "COLECCIÓN 2022", url: "/sales" },
-            { name: "COLECCIÓN 2021", url: "/sales" },
-            { name: "COLECCIÓN 2020", url: "/sales" },
+            { name: "COLECCIÓN 2023", url: "/sales?category=BOOKS_Coleccion2023" },
+            { name: "COLECCIÓN 2022", url: "/sales?category=BOOKS_Coleccion2022" },
+            { name: "COLECCIÓN 2021", url: "/sales?category=BOOKS_Coleccion2021" },
+            { name: "COLECCIÓN 2020", url: "/sales?category=BOOKS_Coleccion2020" },
         ]
     },
     {
         name: "UNIFORMES EMPRESARIALES",
         content: [
-            { name: "Camisas", url: "/sales" },
+            { name: "Camisas", url: "/sales?category=UNIFORMES_Camisas" },
         ]
     },
 ];
@@ -63,6 +64,7 @@ const Navbar = () => {
     const [activeSegment, setActiveSegment] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const [expandedSegment, setExpandedSegment] = useState(null);
+    const router = useRouter();
 
     const handleMouseEnter = (name) => {
         setActiveSegment(name);
@@ -76,7 +78,12 @@ const Navbar = () => {
         setExpandedSegment(expandedSegment === name ? null : name);
     };
 
-    const router = useRouter();
+    const handleCategoryClick = (url) => {
+        router.push(url);
+        setActiveSegment(null);
+        setMenuOpen(false);
+    };
+
     const goCart = () => {
         router.push('/cart');
     };
@@ -149,7 +156,7 @@ const Navbar = () => {
                         <ul className={`absolute ${activeSegment === segment.name ? 'block' : 'hidden'} bg-black rounded-lg text-white mt-2 space-y-2 w-40`}>
                             {segment.content.map(item => (
                                 <li key={item.name}>
-                                    <a href={item.url} className="block px-4 py-2 hover:text-orange-400">{item.name}</a>
+                                    <a href="#" className="block px-4 py-2 hover:text-orange-400" onClick={() => handleCategoryClick(item.url)}>{item.name}</a>
                                 </li>
                             ))}
                         </ul>
@@ -167,7 +174,7 @@ const Navbar = () => {
                     </a>
                     <a onClick={goCart}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-shopping-bag hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24h24z" fill="none" />
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
                             <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
                         </svg>
@@ -192,7 +199,7 @@ const Navbar = () => {
                                 <ul className="pl-4">
                                     {segment.content.map(item => (
                                         <li key={item.name}>
-                                            <a href={item.url} className="block px-4 py-2 text-white hover:text-orange-400">- {item.name}</a>
+                                            <a href="#" className="block px-4 py-2 text-white hover:text-orange-400" onClick={() => handleCategoryClick(item.url)}>- {item.name}</a>
                                         </li>
                                     ))}
                                 </ul>

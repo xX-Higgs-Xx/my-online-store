@@ -1,8 +1,10 @@
+import Navbar from '@/components/Navbar';
 import Cart from '../components/Cart';
 
+
 const CartPage = () => (
-  <div>
-    <h1>Cart</h1>
+  <div className='w-full h-screen bg-zinc-200'>
+    <Navbar />
     <Cart />
   </div>
 );
