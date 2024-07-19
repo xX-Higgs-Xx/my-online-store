@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PayPalButton from './PayPalButton';
 import Footer from './Footer';
+import { useRouter } from 'next/router';
 
 const initialCart = [
     { id: 1, name: "Camiseta de algodón negra", price: 19.99, quantity: 2, image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" },
@@ -11,6 +12,10 @@ const initialCart = [
 const ShoppingCart = () => {
     const [cart, setCart] = useState(initialCart);
     const [selectedPayment, setSelectedPayment] = useState('');
+    const [showOrderSummary, setShowOrderSummary] = useState(false);
+    const [isScreenHeight, setIsScreenHeight] = useState(true);
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const router = useRouter();
 
     const handleQuantityChange = (id, amount) => {
         setCart(cart.map(item =>
@@ -30,9 +35,20 @@ const ShoppingCart = () => {
 
     const { subtotal, total } = calculateTotal();
 
+    const handleProceedToCheckout = () => {
+        setShowOrderSummary(true);
+        setIsScreenHeight(false);
+    };
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log('Formulario de dirección enviado');
+        setFormSubmitted(true);
+    };
+    
     return (
         <>
-            <div className="pt-28 lg:pt-48 h-screen overflow-y-scroll lg:overflow-y-hidden overflow-x-hidden relative">
+            <div className={`pt-28 lg:pt-48 ${isScreenHeight ? 'h-screen' : 'h-auto'} overflow-y-scroll lg:overflow-y-hidden overflow-x-hidden relative bg-white`}>
                 <h1 className="text-2xl font-bold mb-6 ml-16">Carrito de compras</h1>
                 <div className="grid md:grid-cols-[1fr_300px] gap-8 lg:px-16">
                     <div className="grid gap-6">
@@ -131,7 +147,7 @@ const ShoppingCart = () => {
                             <div className="border-t border-gray-300 my-2"></div>
                             <div className="flex items-center justify-between font-semibold">
                                 <span>Total:</span>
-                                <span>${(total+(subtotal*0.16)).toFixed(2)}</span>
+                                <span>${(total + (subtotal * 0.16)).toFixed(2)}</span>
                             </div>
                         </div>
                         <div className="grid gap-2">
@@ -140,23 +156,92 @@ const ShoppingCart = () => {
                                     PayPal
                                 </button>
                                 <div className='text-center text-xs text-blue-700'>
-                                    Por el momento, el unico metodo de pago es PayPal.
+                                    Por el momento, el único método de pago es PayPal.
                                 </div>
                             </div>
-                            {selectedPayment === 'PayPal' && (
+                            {selectedPayment === 'PayPal' && formSubmitted && (
                                 <div>
                                     <PayPalButton total={total} />
                                 </div>
                             )}
                             <button
                                 className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2"
-                                onClick={() => alert('Procediendo al pago')}
+                                onClick={handleProceedToCheckout}
                             >
-                                Proceder al pago
+                                Ingresa tu dirección
                             </button>
                         </div>
                     </div>
                 </div>
+                {showOrderSummary && (
+                    <div className="bg-gray-100 rounded-lg p-16 mt-8">
+                        <div className="w-full h-px bg-zinc-300 mb-12"></div>
+                        <h2 className="text-2xl font-bold mb-4">Detalles de la Entrega</h2>
+                        <form onSubmit={handleFormSubmit}>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Dirección
+                                </label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    placeholder="Ingresa la dirección"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Ciudad
+                                </label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    placeholder="Ingresa la ciudad"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Estado
+                                </label>
+                                <input
+                                    type="text"
+                                    name="state"
+                                    placeholder="Ingresa el estado"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    País
+                                </label>
+                                <input
+                                    type="text"
+                                    name="country"
+                                    placeholder="Ingresa el país"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Código Postal
+                                </label>
+                                <input
+                                    type="text"
+                                    name="postalCode"
+                                    placeholder="Ingresa el código postal"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8"
+                            >
+                                Guardar Ubicación
+                            </button>
+                        </form>
+                    </div>
+                )}
             </div>
             <Footer />
         </>
