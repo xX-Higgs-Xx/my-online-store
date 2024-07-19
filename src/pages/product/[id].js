@@ -36,35 +36,35 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className='w-full'>
+        <div className="w-screen overflow-x-hidden">
             <Navbar />
-            <div className="max-w-6xl px-4 mx-auto py-6 text-lg lg:pt-48 pt-28">
+            <div className="text-lg lg:pt-48 pt-28 pb-10">
                 <div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start">
                     <div className="grid gap-4 md:gap-8">
-                        <Carousel showThumbs={true} infiniteLoop={true}>
+                        <Carousel showThumbs={true} infiniteLoop={true} className="px-3">
                             {product.images.map((image, index) => (
                                 <div key={index}>
                                     <img
                                         src={image}
                                         alt={`Product Image ${index + 1}`}
-                                        className="object-fill w-screen h-a rounded-lg overflow-hidden"
-                                        style={{ aspectRatio: '2/3' }}
+                                        className="rounded-lg overflow-hidden"
+                                        style={{  }}
                                     />
                                 </div>
                             ))}
                         </Carousel>
                     </div>
                     <div className="grid gap-6 md:gap-10 items-start">
-                        <div className="grid gap-4">
+                        <div className="grid gap-4 px-5">
                             <h1 className="font-bold text-3xl lg:text-4xl">{product.name}</h1>
                             <div className="text-4xl font-bold">${product.price}</div>
                         </div>
                         <form className="grid gap-6 md:gap-10 px-5">
-                            <div className="grid gap-2 my-9 lg:my-0 ">
-                                <label className="text-4xl lg:font-medium lg:text-lg" htmlFor="size">Talla</label>
+                            <div className="grid gap-2 my-9 lg:my-0">
+                                <label className="text-xl lg:font-medium lg:text-lg" htmlFor="size">Talla</label>
                                 <div className="flex items-center gap-2" id="size">
                                     {['xs', 's', 'm', 'l', 'xl'].map(size => (
-                                        <label key={size} className="lg:text-base font-medium text-2xl leading-none border cursor-pointer rounded-md p-2 flex items-center gap-2 justify-around w-full">
+                                        <label key={size} className="lg:text-base font-medium text-sm leading-none border cursor-pointer rounded-md p-2 flex items-center gap-2 justify-around w-full">
                                             <input
                                                 type="radio"
                                                 name="size"
@@ -86,17 +86,17 @@ const ProductDetails = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="grid gap-2">
+                                <div className="grid">
                                     <label className="font-medium text-4xl lg:text-lg" htmlFor="quantity">Cantidad</label>
                                     <input
                                         type="number"
                                         value={quantity}
                                         onChange={handleQuantityChange}
-                                        className="flex w-8/12 text-center text-3xl items-center justify-between rounded-md border px-4 py-3 lg:text-base"
-                                        min="1"
+                                        className="flex text-center text-sm items-center justify-between rounded-md border py-3 lg:text-base"
+                                        min="0"
                                     />
                                 </div>
-                                <button type="button" className="w-full border-2 border-black mt-9 hover:border-none hover:text-white hover:bg-black duration-500 text-2xl lg:text-lg font-medium text-primary-foreground h-12 rounded-md px-8">
+                                <button type="button" className="w-full border-2 py-3 border-black mt-9 hover:border-none hover:text-white hover:bg-black duration-500 text-sm lg:text-lg font-medium text-primary-foreground rounded-md">
                                     Agregar al carrito
                                 </button>
                             </div>

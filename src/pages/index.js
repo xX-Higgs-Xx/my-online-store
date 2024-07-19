@@ -25,10 +25,10 @@ const HomePage = () => (
             {images.map((image, index) => (
                 <div key={index} className='w-full h-screen relative'>
                     <img src={image} alt={`Slide ${index + 1}`} className='w-full h-screen object-cover' />
-                    <Banner />
                 </div>
             ))}
         </Carousel>
+            <Banner />
         <Footer />
     </div>
 );

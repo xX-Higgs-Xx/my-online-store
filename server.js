@@ -16,7 +16,6 @@ const httpsOptions = {
 app.prepare().then(() => {
   const server = express();
 
-  // Servir archivos estáticos
   server.use(express.static(path.join(__dirname, 'public')));
 
   server.all('*', (req, res) => {
@@ -25,6 +24,6 @@ app.prepare().then(() => {
 
   https.createServer(httpsOptions, server).listen(3000, err => {
     if (err) throw err;
-    console.log('Servidor HTTPS corriendo en https://localhost:3000 y https://192.168.1.70:3000');
+    console.log('Servidor HTTPS corriendo en https://localhost:3000 y https://192.168.1.80:3000');
   });
 });
