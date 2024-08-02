@@ -1,10 +1,12 @@
+// src/pages/product/[id].js
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import products from '../../data/products';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer';
+import ModalSizeChart from '@/components/ModalSizeChart';
 
 const ProductDetails = () => {
     const router = useRouter();
@@ -12,6 +14,8 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState('m');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false); // Estado para el corazón
 
     useEffect(() => {
         if (id) {
@@ -29,6 +33,34 @@ const ProductDetails = () => {
 
     const handleSizeChange = (event) => {
         setSelectedSize(event.target.value);
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleFavoriteClick = () => {
+        setIsFavorite(!isFavorite); // Alterna el estado de favorito
+    };
+
+    const handleShareClick = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: product.name,
+                text: 'Check out this product!',
+                url: window.location.href,
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            }).catch((error) => {
+                console.error('Error sharing:', error);
+            });
+        } else {
+            alert('Web Share API is not supported in your browser.');
+        }
     };
 
     if (!product) {
@@ -55,12 +87,32 @@ const ProductDetails = () => {
                         </Carousel>
                     </div>
                     <div className="grid gap-6 md:gap-10 items-start">
-                        <div className="grid gap-4">
-                            <h1 className="font-bold text-3xl lg:text-4xl">{product.name}</h1>
-                            <div className="text-4xl font-bold">${product.price}</div>
+                        <div className="flex-row">
+                            <div className="grid gap-4">
+                                <div className="flex justify-between">
+                                    <h1 className="font-bold text-3xl lg:text-4xl">{product.name}</h1>
+                                    <div>
+                                        <button className="pr-5" onClick={handleShareClick}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-share-2" width="30" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M8 9h-1a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-8a2 2 0 0 0 -2 -2h-1" />
+                                                <path d="M12 14v-11" />
+                                                <path d="M9 6l3 -3l3 3" />
+                                            </svg>
+                                        </button>
+                                        <button className="pr-5 lg:pr-0" onClick={handleFavoriteClick}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-heart" width="30" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill={isFavorite ? "#2c3e50" : "none"} strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="text-4xl font-bold">${product.price}</div>
+                            </div>
                         </div>
                         <form className="grid gap-6 md:gap-10 px-5">
-                            <div className="grid gap-2 my-9 lg:my-0 ">
+                            <div className="grid gap-2 my-9 lg:my-0">
                                 <label className="text-4xl lg:font-medium lg:text-lg" htmlFor="size">Talla</label>
                                 <div className="flex items-center gap-2" id="size">
                                     {['xs', 's', 'm', 'l', 'xl'].map(size => (
@@ -84,6 +136,11 @@ const ProductDetails = () => {
                                         </label>
                                     ))}
                                 </div>
+                            </div>
+                            <div className="flex items-center -mt-9 text-sm">
+                                <button type="button" onClick={handleOpenModal}>
+                                    Encuentra tu talla
+                                </button>
                             </div>
                             <div className="flex items-center gap-4">
                                 <div className="grid gap-2">
@@ -126,6 +183,7 @@ const ProductDetails = () => {
                 </div>
             </div>
             <Footer />
+            <ModalSizeChart isOpen={isModalOpen} onRequestClose={handleCloseModal} />
         </div>
     );
 };

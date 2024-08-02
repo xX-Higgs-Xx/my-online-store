@@ -8,7 +8,7 @@ const images = [
     'https://c.wallhere.com/photos/fe/f2/1575x977_px_babay_wallpapers_Batman_city_landscapes_cool_images_cute_babies_famous_people_hd_desktop_images-801494.jpg!d',
     'https://www.10wallpaper.com/wallpaper/3840x2160/1804/Hanger_clothing_fashion_market_4K_HD_3840x2160.jpg',
     'https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?cs=srgb&dl=pexels-daiangan-102129.jpg&fm=jpg',
-    'https://www.ucl.ac.uk/behaviour-change/sites/behaviour_change/files/pexels-kai-pilger-996329.jpg'
+    './assets/imgIndex.jpg'
 ];
 
 const HomePage = () => (

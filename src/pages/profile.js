@@ -1,23 +1,36 @@
 import Navbar from '@/components/Navbar';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
-
+import products from '../data/products'; // Suponiendo que tienes un archivo de datos de productos
 
 const ProfilePage = () => {
     const { isAuthenticated, user } = useAuth();
     const router = useRouter();
+    const [favoriteProducts, setFavoriteProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 4;
 
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login');
+        } else {
+            // Simulamos la obtención de productos favoritos
+            const favorites = products.filter(product =>
+                ['1', '3', '5', '2', '4', '6', '7'].includes(product.id) // Simula los IDs de productos favoritos
+            );
+            setFavoriteProducts(favorites);
         }
     }, [isAuthenticated, router]);
 
     if (!isAuthenticated) {
         return <div>Loading...</div>;
     }
+
+    const totalPages = Math.ceil(favoriteProducts.length / productsPerPage);
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const selectedProducts = favoriteProducts.slice(startIndex, startIndex + productsPerPage);
 
     return (
         <div className='bg-zinc-100'>
@@ -64,6 +77,52 @@ const ProfilePage = () => {
                                 />
                             </div>
                         </div>
+                    </section>
+                    <section className="grid gap-4">
+                        <h2 className="text-lg font-semibold">Productos Favoritos</h2>
+                        {favoriteProducts.length > 0 ? (
+                            <div className="relative">
+                                <div className="flex items-center justify-between">
+                                    {currentPage > 1 && (
+                                        <button
+                                            className="absolute left-0 z-10 bg-white rounded-full p-2 shadow-lg"
+                                            onClick={() => setCurrentPage(currentPage - 1)}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                    <div className="flex gap-4 overflow-hidden w-full">
+                                        {selectedProducts.map(product => (
+                                            <div key={product.id} className="flex flex-col items-center border rounded-lg p-4 bg-white w-1/4">
+                                                <img
+                                                    src={product.images[0]}
+                                                    alt={product.name}
+                                                    className="object-cover w-full h-48 rounded-lg"
+                                                />
+                                                <div className="mt-2 text-center">
+                                                    <h3 className="font-semibold">{product.name}</h3>
+                                                    <p className="text-gray-500">${product.price.toFixed(2)}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {currentPage < totalPages && (
+                                        <button
+                                            className="absolute right-0 z-10 bg-white rounded-full p-2 shadow-lg"
+                                            onClick={() => setCurrentPage(currentPage + 1)}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <p>No tienes productos favoritos.</p>
+                        )}
                     </section>
                     <section className="grid gap-4">
                         <h2 className="text-lg font-semibold">Historial de pedidos</h2>

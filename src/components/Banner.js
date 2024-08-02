@@ -1,5 +1,3 @@
-// src/components/Banner.js
-
 const Banner = () => (
     <div className="absolute bottom-0 left-0 w-full text-white flex flex-col justify-end p-8 lg:p-16">
         <div className="lg:flex mb-8 lg:mb-12">
