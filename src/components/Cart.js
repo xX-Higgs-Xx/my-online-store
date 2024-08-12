@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PayPalButton from './PayPalButton';
+import axios from 'axios';
 import Footer from './Footer';
 import { useRouter } from 'next/router';
 
@@ -30,17 +30,13 @@ const ShoppingCart = () => {
 
     const calculateTotal = () => {
         const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const total = subtotal;
+        const total = subtotal + subtotal * 0.16; // Incluye impuestos
         return { subtotal, total };
     };
 
     const { subtotal, total } = calculateTotal();
 
     const handleProceedToCheckout = () => {
-        if (selectedPayment !== 'PayPal') {
-            alert('Por favor selecciona PayPal como método de pago.');
-            return;
-        }
         setShowOrderSummary(true);
         setIsScreenHeight(false);
     };
@@ -59,10 +55,36 @@ const ShoppingCart = () => {
         setFormSubmitted(true);
     };
 
-    const handleProceedToPayment = () => {
-        alert('Proceeding to payment...');
-        // Aquí puedes agregar la lógica para redirigir a la página de pago o procesar el pago
+    const handleProceedToPayment = async () => {
+        try {
+            const payload = {
+                amount: total.toFixed(2),
+                currency: 'MXN',
+                description: 'Compra en My Online Store',
+                // Añade más detalles aquí si es necesario
+            };
+    
+            const response = await axios.post('https://api.clip.mx/v1/payments', payload, {
+                headers: {
+                    'Authorization': `Bearer test_0c2445ba-5717-44aa-8981-7d0b4eb51eb2`,
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            console.log('Response from Clip:', response.data);
+    
+            if (response.data.status === 'approved') {
+                alert('Pago exitoso');
+                // Redirigir o actualizar estado después del pago exitoso
+            } else {
+                alert('Hubo un problema con tu pago, por favor intenta nuevamente.');
+            }
+        } catch (error) {
+            console.error('Error procesando el pago:', error.response?.data || error.message);
+            alert('Error procesando el pago, por favor intenta más tarde.');
+        }
     };
+    
 
     const handleBackToAddress = () => {
         setFormSubmitted(false);
@@ -170,21 +192,21 @@ const ShoppingCart = () => {
                                 <div className="border-t border-gray-300 my-2"></div>
                                 <div className="flex items-center justify-between font-semibold">
                                     <span>Total:</span>
-                                    <span>${(total + (subtotal * 0.16)).toFixed(2)}</span>
+                                    <span>${total.toFixed(2)}</span>
                                 </div>
                             </div>
                             <div className="grid gap-2">
                                 <div className="block justify-between">
-                                    <button className={`px-4 py-2 rounded-md border ${selectedPayment === 'PayPal' ? 'border-black' : 'border-gray-300'} w-full mb-5`} onClick={() => setSelectedPayment('PayPal')}>
-                                        PayPal
+                                    <button className={`px-4 py-2 rounded-md border ${selectedPayment === 'CreditCard' ? 'border-black' : 'border-gray-300'} w-full mb-5`} onClick={() => setSelectedPayment('CreditCard')}>
+                                        Tarjeta de Crédito
                                     </button>
                                     <div className='text-center text-xs text-blue-700'>
-                                        Por el momento, el único método de pago es PayPal.
+                                        Por el momento, el único método de pago es tarjeta de crédito.
                                     </div>
                                 </div>
-                                {selectedPayment === 'PayPal' && (
+                                {selectedPayment === 'CreditCard' && (
                                     <div>
-                                        <PayPalButton total={total} />
+                                        {/* Aquí podrías mostrar un formulario adicional para obtener detalles de la tarjeta si es necesario */}
                                     </div>
                                 )}
                                 <button
@@ -302,7 +324,7 @@ const ShoppingCart = () => {
                             <div className="border-t border-gray-300 my-2"></div>
                             <div className="flex items-center justify-between font-semibold">
                                 <span>Total:</span>
-                                <span>${(total + (subtotal * 0.16)).toFixed(2)}</span>
+                                <span>${total.toFixed(2)}</span>
                             </div>
                         </div>
                         <div className="mt-8">

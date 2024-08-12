@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "payclip",
+      "source": "@payclip/v2.0#fu7r2xlvcxz97l",
+      "integrity": "sha512-7WmEiQNmEl0gZX/dTHMBQlUzjbZZPJQAbM/mkOXyOh23xGQ7mPGu6bCAnB7/4PYPtOjtb4q4o9r4sNqqV6+DRQ==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}

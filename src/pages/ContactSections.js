@@ -34,7 +34,7 @@ const ContactPage = () => (
               </div>
               <h3 className="text-xl font-semibold">Teléfono</h3>
             </div>
-            <div className="text-muted-foreground">Llámanos al +1 (555) 123-4567 de lunes a viernes de 9am a 6pm.</div>
+            <div className="text-muted-foreground">Llámanos al +52 (777) 199-4666 de lunes a viernes de 9am a 6pm.</div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">
             <div className="flex items-center gap-4">
@@ -58,7 +58,7 @@ const ContactPage = () => (
               <h3 className="text-xl font-semibold">Email</h3>
             </div>
             <div className="text-muted-foreground">
-              Envíanos un correo a info@jaffantoniofigueroa.com y te responderemos a la brevedad.
+              Envíanos un correo a <a href="mailto:info@jaffantoniofigueroa.com" className="text-blue-800">info@jaffantoniofigueroa.com</a> y te responderemos a la brevedad.
             </div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">
@@ -84,31 +84,21 @@ const ContactPage = () => (
               <h3 className="text-xl font-semibold">Instagram</h3>
             </div>
             <div className="text-muted-foreground">
-              Síguenos en Instagram @fashiondesign para estar al tanto de nuestras últimas novedades.
+              Síguenos en Instagram <a href="https://www.instagram.com/jaffantoniofigueroa/" target="_blank" rel="noopener noreferrer" className="text-blue-800">@jaffantoniofigueroa</a> para estar al tanto de nuestras últimas novedades.
             </div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">
             <div className="flex items-center gap-4">
               <div className="bg-primary rounded-md p-3 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6 text-primary-foreground"
-                >
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-tiktok" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M21 7.917v4.034a9.948 9.948 0 0 1 -5 -1.951v4.5a6.5 6.5 0 1 1 -8 -6.326v4.326a2.5 2.5 0 1 0 4 2v-11.5h4.083a6.005 6.005 0 0 0 4.917 4.917z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold">Twitter</h3>
+              <h3 className="text-xl font-semibold">TikTok</h3>
             </div>
             <div className="text-muted-foreground">
-              Interactúa con nosotros en Twitter @fashiondesign y comparte tus ideas.
+              Interactúa con nosotros en Tiktok <a href="https://www.tiktok.com/@jaffantoniofigueroa" target="_blank" rel="noopener noreferrer" className="text-blue-800">@jaffantoniofigueroa</a> y no te pierdas ninguna noticia.
             </div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">
@@ -132,7 +122,7 @@ const ContactPage = () => (
               <h3 className="text-xl font-semibold">Facebook</h3>
             </div>
             <div className="text-muted-foreground">
-              Encuéntranos en Facebook /fashiondesign y mantente al tanto de nuestras novedades.
+              Encuéntranos en Facebook <a href="https://www.facebook.com/Jaffantoniofigueroa/" target="_blank" rel="noopener noreferrer" className="text-blue-800">/Jaffantoniofigueroa</a> y mantente al tanto de nuestras novedades.
             </div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">
@@ -157,7 +147,7 @@ const ContactPage = () => (
               <h3 className="text-xl font-semibold">Ubicación</h3>
             </div>
             <div className="text-muted-foreground">
-              Visítanos en 123 Avenida de la Moda, Ciudad de la Moda, País de la Moda.
+              Visítanos en <a href="https://maps.app.goo.gl/9PokcJEsfbRtjqjD8" target="_blank" rel="noopener noreferrer" className="text-blue-800">Calle anenecuilco esquina con trinidad paniagua, Calle 10 de Abril #624, Emiliano Zapata, 62466 Cuernavaca, Mor.</a> 
             </div>
           </div>
         </div>

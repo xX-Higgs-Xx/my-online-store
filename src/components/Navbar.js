@@ -63,20 +63,12 @@ const Segmentos = [
 const Navbar = () => {
     const [activeSegment, setActiveSegment] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [expandedSegment, setExpandedSegment] = useState(null);
     const router = useRouter();
     const { isAuthenticated } = useAuth();
 
-    const handleMouseEnter = (name) => {
-        setActiveSegment(name);
-    };
-
-    const handleMouseLeave = () => {
-        setActiveSegment(null);
-    };
-
     const toggleSegment = (name) => {
-        setExpandedSegment(expandedSegment === name ? null : name);
+        // Si el segmento ya está activo, lo cerramos. Si no, lo abrimos.
+        setActiveSegment(activeSegment === name ? null : name);
     };
 
     const handleCategoryClick = (url) => {
@@ -134,13 +126,6 @@ const Navbar = () => {
                     </button>
                 </div>
                 <div className="md:flex hidden space-x-4">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                            <path d="M21 21l-6 -6" />
-                        </svg>
-                    </a>
                     <a onClick={goCart}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-shopping-bag hover:stroke-orange-400 duration-500" width="26" height="26" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -160,8 +145,10 @@ const Navbar = () => {
             </div>
             <ul className={`md:flex space-x-4 justify-around px-48 ${menuOpen ? 'hidden' : 'hidden'}`}>
                 {Segmentos.map(segment => (
-                    <li key={segment.name} className="group relative" onMouseEnter={() => handleMouseEnter(segment.name)} onMouseLeave={handleMouseLeave}>
-                        <a href="#" className="border-animation">{segment.name}</a>
+                    <li key={segment.name} className="group relative">
+                        <button className="border-animation" onClick={() => toggleSegment(segment.name)}>
+                            {segment.name}
+                        </button>
                         <ul className={`absolute ${activeSegment === segment.name ? 'block' : 'hidden'} bg-black rounded-lg text-white mt-2 space-y-2 w-40`}>
                             {segment.content.map(item => (
                                 <li key={item.name}>
@@ -204,7 +191,7 @@ const Navbar = () => {
                             <button className="w-full px-4 py-2 text-white hover:text-orange-400" onClick={() => toggleSegment(segment.name)}>
                                 {segment.name}
                             </button>
-                            {expandedSegment === segment.name && (
+                            {activeSegment === segment.name && (
                                 <ul className="pl-4">
                                     {segment.content.map(item => (
                                         <li key={item.name}>
@@ -232,4 +219,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

@@ -1,4 +1,3 @@
-// src/components/AdminLogin.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -9,8 +8,6 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para autenticar al administrador
-    // Por ejemplo, puedes hacer una petición a tu backend para verificar las credenciales
     const isAuthenticated = await authenticateAdmin(email, password);
     if (isAuthenticated) {
       router.push('/admin/dashboard'); // Redirigir a la página del dashboard del admin
@@ -20,8 +17,6 @@ const AdminLogin = () => {
   };
 
   const authenticateAdmin = async (email, password) => {
-    // Lógica de autenticación de administrador (puede ser una llamada a tu API)
-    // Ejemplo:
     // const response = await fetch('/api/admin/login', {
     //   method: 'POST',
     //   headers: {
@@ -31,7 +26,7 @@ const AdminLogin = () => {
     // });
     // const data = await response.json();
     // return data.isAuthenticated;
-    return email === 'admin@example.com' && password === 'adminpassword'; // Esto es solo un ejemplo
+    return email === 'admin@jaff.com'  && password === '123';
   };
 
   return (

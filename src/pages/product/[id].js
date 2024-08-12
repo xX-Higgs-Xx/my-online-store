@@ -72,7 +72,7 @@ const ProductDetails = () => {
             <Navbar />
             <div className="max-w-6xl px-4 mx-auto py-6 text-lg lg:pt-48 pt-28">
                 <div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start">
-                    <div className="grid gap-4 md:gap-8">
+                    <div className="grid gap-4 md:gap-8 z-0">
                         <Carousel showThumbs={true} infiniteLoop={true}>
                             {product.images.map((image, index) => (
                                 <div key={index}>
@@ -137,7 +137,7 @@ const ProductDetails = () => {
                                     ))}
                                 </div>
                             </div>
-                            <div className="flex items-center -mt-9 text-sm">
+                            <div className="flex items-center -mt-9 text-sm hover:font-bold duration-100">
                                 <button type="button" onClick={handleOpenModal}>
                                     Encuentra tu talla
                                 </button>
