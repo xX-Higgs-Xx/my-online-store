@@ -1,4 +1,3 @@
-// src/pages/contact.js
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 

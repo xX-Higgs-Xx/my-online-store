@@ -67,7 +67,6 @@ const Navbar = () => {
     const { isAuthenticated } = useAuth();
 
     const toggleSegment = (name) => {
-        // Si el segmento ya está activo, lo cerramos. Si no, lo abrimos.
         setActiveSegment(activeSegment === name ? null : name);
     };
 
