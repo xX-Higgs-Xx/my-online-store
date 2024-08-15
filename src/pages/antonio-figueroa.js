@@ -14,10 +14,10 @@ const AntonioFigueroa = () => {
                 <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-bold">Biografía</h2>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground text-justify">
                             JAFF ANTONIO FIGUEROA, diseñador originario de Juliantla, Gro, Mexico, cuenta con 24 años de trayectoria en el mundo de la moda; iniciando a los 12 años con el diseño de joyería en plata y piedras semipreciosas, en la hermosa ciudad platera de Taxco Alarcón, Gro. creando una firma independiente, para después especializarse a la edad de 18 años en el mundo del diseño textil.
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground text-justify">
                             Joven empresario con dos licenciaturas en la rama textil (Lic. Diseño y asesor de modas, Lic. Publicidad y Mercadotecnia de la moda), egresado de Janette Klein campus de la moda.
                         </p>
                     </div>
@@ -39,8 +39,7 @@ const AntonioFigueroa = () => {
                     <div className="space-y-4 order-2 md:order-1">
                         <h2 className="text-3xl md:text-5xl font-bold">Logros</h2>
                         <p className="text-muted-foreground">
-                            Conoce los principales logros y reconocimientos de este diseñador, que lo han convertido en una figura
-                            destacada en la industria.
+                            Conoce los principales logros y reconocimientos de este diseñador, que lo han convertido en una figura destacada en la industria.
                         </p>
                     </div>
                     <div className="order-1 md:order-2 relative text-black text-center">
@@ -244,10 +243,10 @@ const AntonioFigueroa = () => {
                 <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-bold">Impacto</h2>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground text-justify">
                             Se ha especializado en un diseño exclusivo y tendencioso, de este enfoque se desprenden 2 firmas JAFF & ANTONIO FIGUEROA (firmas fundadas por el mismo), posicionándose desde hace 15 años en el mercado con un éxito distintivo; abriéndose campo entre el demandante y emergente mundo de la moda, JAFF ANTONIO FIGUEROAF se ha vuelto un diseñador no solo latino, sino transnacional.
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground text-justify">
                         JAFF ANTONIO FIGUEROA está por estrenar nuevas líneas, para el extendimiento de su firma y así mismo poder masificar en las necesidades y cualidades de sus clientes. Con la visión de seguir expandiendo su trabajo a un mercado internacional, siempre con la intención de dejar en lo alto el nombre del diseño Mexicano y sobre todo, guerrerense.
                         </p>
                     </div>

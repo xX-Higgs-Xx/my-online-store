@@ -57,7 +57,7 @@ const ContactPage = () => (
               <h3 className="text-xl font-semibold">Email</h3>
             </div>
             <div className="text-muted-foreground">
-              Envíanos un correo a <a href="mailto:info@jaffantoniofigueroa.com" className="text-blue-800">info@jaffantoniofigueroa.com</a> y te responderemos a la brevedad.
+              Envíanos un correo a <a href="mailto:contacto@jaffantoniofigueroa.com" className="text-blue-800">contacto@jaffantoniofigueroa.com</a> y te responderemos a la brevedad.
             </div>
           </div>
           <div className="bg-card rounded-lg p-6 space-y-4">

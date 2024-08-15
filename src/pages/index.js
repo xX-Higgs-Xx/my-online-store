@@ -5,12 +5,13 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const images = [
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9086.jpg?alt=media&token=44b348b5-994f-41d5-baf4-aa76c16df3c0',
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9077.jpg?alt=media&token=3e3de6e4-f943-4ac9-8989-0b7c397cf2ff',
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9070.jpg?alt=media&token=a6333b75-9d23-4c20-b3ab-47a3745587eb',
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9033.jpg?alt=media&token=914f262f-45bb-4c27-b92c-acb0615a3c73',
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9027.jpg?alt=media&token=9c4cf031-b0a1-4a74-bd7f-32b9777fe3a2',
-    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_8990.jpg?alt=media&token=43921fcc-1f21-4dd7-a584-7edac69329fe'
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FDISE%C3%91O3.jpg?alt=media&token=0bd2fceb-83d6-4623-864c-e85713dccc10',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_8969.jpg?alt=media&token=e727c7bf-d5ba-4d9b-8f97-e8c9bd323c03',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_8981.jpg?alt=media&token=a385d7ac-1212-4c8a-9079-5fa33f9bcaf3',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9027.jpg?alt=media&token=ae0d65fb-1ad6-44dc-b85f-4ad716d8dd89',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9033.jpg?alt=media&token=c8c82da6-666d-474a-a5b0-271197f816ff',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FIMG_9075.jpg?alt=media&token=1ecc297c-960a-42de-8f1f-753e8cb83a67',
+    'https://firebasestorage.googleapis.com/v0/b/tienda-jaff.appspot.com/o/IMG%20INDEX%2FimgIndex.jpg?alt=media&token=449234a9-a113-4ea4-8e6a-32396450633f'
 ];
 
 const HomePage = () => (
