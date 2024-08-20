@@ -30,7 +30,6 @@ const ShoppingCart = () => {
 
     const calculateTotal = () => {
         const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const total = subtotal + subtotal * 0.16; // Incluye impuestos
         const total = subtotal + subtotal * 0.16;
         return { subtotal, total };
     };
